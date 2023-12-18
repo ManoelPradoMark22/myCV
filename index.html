@@ -77,6 +77,15 @@
       align-items: center;
     }
 
+    .productsDiv {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .eachProject {
+      margin: 0 5px;
+    }
+
     .education-container,
     .certifications-container,
     .projects-container {
@@ -273,19 +282,22 @@
         const categoryContainer = document.createElement("div");
         categoryContainer.innerHTML = `<h3>${category.category}</h3>`;
 
+        const productsContainer = document.createElement("div");
+        productsContainer.setAttribute('class', 'productsDiv');
+
         category.projects.forEach(project => {
           const projectItem = document.createElement("div");
           projectItem.classList.add("project-item");
 
           projectItem.innerHTML = `
-            <a href="${project.link}" target="_blank">
+            <a href="${project.link}" class="eachProject" target="_blank">
               <img src="${project.image}" alt="${project.name}" width="${project.width}" height="${project.height}"/>
             </a>
           `;
 
-          categoryContainer.appendChild(projectItem);
+          productsContainer.appendChild(projectItem);
         });
-
+        categoryContainer.appendChild(productsContainer);
         projectsContainer.appendChild(categoryContainer);
       });
     }
