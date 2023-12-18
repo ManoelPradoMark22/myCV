@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manoel Prado - Certificações</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: #fff;
+      position: static;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      padding: 10px 20px;
+    }
+
+    header .sections {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    header .section-link {
+      margin-left: 20px;
+      color: #fff;
+      text-decoration: none;
+      cursor: pointer;
+      overflow: initial !important;
+    }
+
+    .categoryTitle {
+      text-align: center;
+      align-items: center;
+    }
+
+    .education-container,
+    .certifications-container,
+    .projects-container {
+      max-width: 800px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .skills-container {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .legendaSkills {
+      text-align: center;
+    }
+
+    .skills-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .education-item,
+    .certification-item,
+    .project-item {
+      border-bottom: 1px solid #ddd;
+      padding: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .details {
+      flex-grow: 1;
+    }
+
+    .title,
+    .position,
+    .issuer,
+    .code,
+    .date,
+    .location,
+    .link-button,
+    .description {
+      font-size: 14px;
+      color: #555;
+    }
+    
+    .location {
+      margin-top: 10px;
+    }
+
+    .description {
+      font-size: 14px;
+      color: #333;
+      margin-top: 10px;
+    }
+
+    .link-button {
+      background-color: #0073b1;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .projects-container h3 {
+      margin-bottom: 10px;
+    }
+
+    .projects-container img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Manoel Prado</div>
+    <div class="sections">
+      <a href="#skills-container" class="section-link">Skills</a>
+      <a href="#education-container-title" class="section-link">Formação Acadêmica</a>
+      <a href="#projects-container-title" class="section-link">Projetos</a>
+      <a href="#certifications-container-title" class="section-link">Licenças e Certificados</a>
+    </div>
+  </header>
+
+  <div class="skills-container" id="skills-container">
+    <!-- Conteúdo da seção SKILLS -->
+    <img src="./assets/skills.png" alt="Skills" style="width: 100%; height: auto; display: block;">
+    <p class="legendaSkills">Legenda Proficiência: <b>0</b> – Nenhuma; <b>1</b> - Básico (consigo fazer ajustes em um projeto existente); <b>2</b> - Intermediário (consigo criar um novo projeto do zero, olhando como base um outro projeto existente); <b>3</b> - Avançado (conheço com profundidade e consigo criar um projeto do zero, sem a necessidade de um outro projeto como exemplo)
+      </p>
+  </div>
+
+  <h3 class="categoryTitle" id="education-container-title">Formação Acadêmica</h3>
+  <div class="education-container" id="education-container">
+    <!-- Formação acadêmica será adicionada aqui usando JavaScript -->
+  </div>
+
+  <h3 class="categoryTitle" id="projects-container-title">Projetos e Portfólio</h3>
+  <div class="projects-container" id="projects-container">
+    <!-- Projetos serão adicionados aqui usando JavaScript -->
+  </div>
+
+  <h3 class="categoryTitle" id="certifications-container-title">Licenças e Certificados</h3>
+  <div class="certifications-container" id="certifications-container">
+    <!-- Certificações serão adicionadas aqui usando JavaScript -->
+  </div>
+
+  <script type="module">
+    import { educationData } from './database/data_academy.js';
+
+    import { certificationsData } from './database/data_certifieds.js';
+
+    import { projectsData } from './database/data_projects.js';
+
+    // Função para criar e anexar um item de formação acadêmica
+    function appendEducation(education) {
+      const educationContainer = document.getElementById("education-container");
+      const educationItem = document.createElement("div");
+      educationItem.classList.add("education-item");
+
+      const formattedDate = getFormattedDate(education.date.start) +
+        (education.date.end ? ` · ${getFormattedDate(education.date.end)}` : '');
+
+      educationItem.innerHTML = `
+        <div class="logo">
+          <img src="${education.logo}" alt="Logo da Instituição">
+        </div>
+        <div class="details">
+          <div class="title">${education.title}</div>
+          <div class="position"><b>${education.position}</b></div>
+          <div class="date">${formattedDate}</div>
+          ${education.location ? `<div class="location">${education.location}</div>` : ''}
+          ${education.description ? `<div class="description">${education.description}</div>` : ''}
+        </div>
+      `;
+
+      educationContainer.appendChild(educationItem);
+    }
+
+    // Função para criar e anexar um item de certificação
+    function appendCertification(certification) {
+      const certificationsContainer = document.getElementById("certifications-container");
+      const certificationItem = document.createElement("div");
+      certificationItem.classList.add("certification-item");
+
+      const formattedDate = getFormattedDate(certification.date);
+      const formattedExpireDate = getFormattedDate(certification.expireDate);
+
+      certificationItem.innerHTML = `
+        <div class="logo">
+          <img src="${certification.logo}" alt="Certification Logo">
+        </div>
+        <div class="details">
+          <div class="title">${certification.title}</div>
+          <div class="issuer"><b>${certification.issuer}</b></div>
+          ${certification.code ? `<div class="code">Código da Certificação: ${certification.code}</div>` : ''}
+          ${certification.expireDate ? `<div class="date">Emitido em ${formattedDate} · Expira em ${formattedExpireDate}</div>` : `<div class="date">Verificação emitida em ${formattedDate}</div>`}
+          ${certification.description ? `<div class="description">${certification.description}</div>` : ''}
+          ${certification.link ? `<a href="${certification.link}" target="_blank" class="link-button">Exibir Credencial</a>` : ''}
+        </div>
+      `;
+
+      certificationsContainer.appendChild(certificationItem);
+    }
+
+    // Função para criar e anexar um item de projeto
+    function appendProjects(projectsData) {
+      projectsData.forEach(category => {
+        const projectsContainer = document.getElementById("projects-container");        
+        const categoryContainer = document.createElement("div");
+        categoryContainer.innerHTML = `<h3>${category.category}</h3>`;
+
+        category.projects.forEach(project => {
+          const projectItem = document.createElement("div");
+          projectItem.classList.add("project-item");
+
+          projectItem.innerHTML = `
+            <a href="${project.link}" target="_blank">
+              <img src="${project.image}" alt="${project.name}" width="${project.width}" height="${project.height}"/>
+            </a>
+          `;
+
+          categoryContainer.appendChild(projectItem);
+        });
+
+        projectsContainer.appendChild(categoryContainer);
+      });
+    }
+
+    // Função para formatar a data como "mês de Ano"
+    function getFormattedDate(date) {
+      const options = { month: 'long', year: 'numeric' };
+      return new Intl.DateTimeFormat('pt-BR', options).format(date);
+    }
+
+    // Popula formação acadêmica
+    educationData.forEach(appendEducation);
+
+    // Popula certificações
+    certificationsData.forEach(appendCertification);
+
+    // Popula projetos
+    appendProjects(projectsData);
+  </script>
+
+</body>
+
+</html>
