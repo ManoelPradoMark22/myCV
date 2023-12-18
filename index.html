@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manoel Prado - CV</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -45,6 +46,31 @@
       cursor: pointer;
       overflow: initial !important;
     }
+
+    .scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #fff;
+  color: #000;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 0; /* Inicia oculto */
+  transition: opacity 0.3s ease-in-out;
+}
+
+.scroll-to-top i {
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
 
     .categoryTitle {
       text-align: center;
@@ -178,6 +204,10 @@
     <!-- Certificações serão adicionadas aqui usando JavaScript -->
   </div>
 
+  <div class="scroll-to-top" id="scrollToTopBtn">
+    <i>↑</i>
+  </div>
+
   <script type="module">
     import { educationData } from './database/data_academy.js';
 
@@ -274,6 +304,35 @@
 
     // Popula projetos
     appendProjects(projectsData);
+
+    // Scroll To Top Button
+const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+// Função para verificar a posição de rolagem e mostrar/ocultar o botão
+function checkScrollPosition() {
+  if (window.pageYOffset > 100) {
+    // Mostra o botão quando a posição de rolagem for maior que 100 pixels
+    scrollToTopBtn.style.opacity = '1';
+  } else {
+    // Oculta o botão quando a posição de rolagem for menor ou igual a 100 pixels
+    scrollToTopBtn.style.opacity = '0';
+  }
+}
+
+// Função para rolar suavemente para o topo
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+
+// Adiciona um ouvinte de rolagem para verificar a posição
+window.addEventListener('scroll', checkScrollPosition);
+
+// Adiciona um ouvinte de clique ao botão para rolar suavemente para o topo
+scrollToTopBtn.addEventListener('click', scrollToTop);
+
   </script>
 
 </body>
